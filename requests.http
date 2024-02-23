@@ -1,0 +1,5 @@
+GET http://localhost:3000/games
+###
+GET http://localhost:3000/games/2
+###
+DELETE http://localhost:3000/games/1
