@@ -3,3 +3,9 @@ GET http://localhost:3000/games
 GET http://localhost:3000/games/2
 ###
 DELETE http://localhost:3000/games/1
+########## Like And Dislike ##########
+POST http://localhost:3000/like/2
+###
+POST http://localhost:3000/dislike/2
+
+
