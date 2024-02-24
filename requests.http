@@ -37,6 +37,8 @@ DELETE http://localhost:3000/reviews/9
 
 
 
+########## Game Like And Game Dislike  ##########
+POST http://localhost:3000/like/3
 ###
 POST http://localhost:3000/dislike/2
 
