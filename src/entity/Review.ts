@@ -14,7 +14,7 @@ export class Review {
   id: number;
 
   @Column({
-    unique: true,
+    length: 30,
   })
   title: string;
 
