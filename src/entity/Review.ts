@@ -12,7 +12,9 @@ export class Review {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({
+    unique: true,
+  })
   title: string;
 
   @Column()
