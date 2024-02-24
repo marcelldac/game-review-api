@@ -1,9 +1,11 @@
 import { AppDataSource } from "../data-source";
 import { NextFunction, Request, Response } from "express";
 import { Game } from "../entity/Game";
+import { Review } from "../entity/Review";
 
 export class GameController {
   private gameRepository = AppDataSource.getRepository(Game);
+  private reviewsRepository = AppDataSource.getRepository(Review);
 
   async all(request: Request, response: Response, next: NextFunction) {
     return this.gameRepository.find({
@@ -48,8 +50,21 @@ export class GameController {
     const id = parseInt(request.params.id);
 
     const gameToRemove = await this.gameRepository.findOneBy({ id });
-
     if (!gameToRemove) return "this game not exist";
+
+    const reviewsToRemove = await this.reviewsRepository.find({
+      where: { game: gameToRemove.id },
+    });
+
+    if (reviewsToRemove) {
+      for (const review of reviewsToRemove) {
+        await this.reviewsRepository.remove(review);
+      }
+
+      await this.gameRepository.remove(gameToRemove);
+
+      return "game and your reviews has been removed";
+    }
 
     await this.gameRepository.remove(gameToRemove);
 
