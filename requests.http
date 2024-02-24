@@ -1,4 +1,4 @@
-########## Games ##########
+########## Games Entity ##########
 GET http://localhost:3000/games
 ###
 GET http://localhost:3000/games/1
@@ -7,7 +7,7 @@ POST http://localhost:3000/games
 Content-Type: application/json
 
 {
-    "name":"Minecraft"
+    "name":"Days Gone"
 }
 ###
 DELETE http://localhost:3000/games/1
