@@ -18,16 +18,9 @@ export class Game {
   @Index({ unique: true })
   name: string;
 
-  @Column({
-    default: 0,
-  })
-  upVotes: number;
+  @Column()
+  likes: number;
 
-  @Column({
-    default: 0,
-  })
-  downVotes: number;
-  1;
   @OneToMany(() => Review, (review) => review.game)
   reviews: Review[];
 }
