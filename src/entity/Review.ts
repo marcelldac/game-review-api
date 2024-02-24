@@ -23,6 +23,6 @@ export class Review {
   @Column()
   likes: number;
 
-  @ManyToOne(() => Game, (game) => game.reviews)
-  game: Game;
+  @ManyToOne(() => Game, (game) => game.reviews, { eager: true })
+  game: number;
 }
