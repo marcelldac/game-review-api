@@ -16,10 +16,7 @@ export class Review {
   name: string;
 
   @Column()
-  upVotes: number;
-
-  @Column()
-  downVotes: number;
+  likes: number;
 
   @ManyToOne(() => Game, (game) => game.reviews)
   game: Game;
