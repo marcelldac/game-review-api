@@ -26,9 +26,6 @@ export class ReviewController {
   async save(request: Request, response: Response, next: NextFunction) {
     const { title, description, gameName } = request.body;
 
-    const review = await this.reviewRepository.findOneBy({ title });
-    if (review) return "review already exists";
-
     const game = await this.gameRepository.findOneBy({ name: gameName });
     if (!game) return "game not found";
 
