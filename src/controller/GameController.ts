@@ -85,6 +85,10 @@ export class GameController {
 
     await this.gameRepository.save(game);
 
-    return `${game.name} disliked. total likes: ${game.likes}`;
+    return {
+      name: game.name,
+      total_likes: game.likes,
+      message: `${game.name} disliked.`,
+    };
   }
 }
