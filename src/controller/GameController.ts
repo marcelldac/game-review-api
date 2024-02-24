@@ -33,17 +33,20 @@ export class GameController {
   async save(request: Request, response: Response, next: NextFunction) {
     const { name } = request.body;
 
-    const game = this.gameRepository.findOne({
-      where: name,
-    });
+    const game = await this.gameRepository.findOneBy({ name });
 
     if (game) {
       return "game already exists";
     }
 
-    const createGame = Object.assign(new Game(), { name });
+    const newGame = Object.assign(new Game(), {
+      name,
+      likes: 0,
+    });
 
-    return this.gameRepository.save(createGame);
+    const createGame = await this.gameRepository.save(newGame);
+
+    return createGame;
   }
 
   async remove(request: Request, response: Response, next: NextFunction) {
