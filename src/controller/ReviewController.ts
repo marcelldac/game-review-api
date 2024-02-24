@@ -1,0 +1,111 @@
+import { AppDataSource } from "../data-source";
+import { NextFunction, Request, Response } from "express";
+import { Review } from "../entity/Review";
+import { Game } from "../entity/Game";
+
+export class ReviewController {
+  private reviewRepository = AppDataSource.getRepository(Review);
+  private gameRepository = AppDataSource.getRepository(Game);
+
+  async all(request: Request, response: Response, next: NextFunction) {
+    return this.reviewRepository.find();
+  }
+
+  async one(request: Request, response: Response, next: NextFunction) {
+    const id = parseInt(request.params.id);
+
+    const review = await this.reviewRepository.findOneBy({ id });
+
+    if (!review) {
+      return "unregistered review";
+    }
+
+    return review;
+  }
+
+  async save(request: Request, response: Response, next: NextFunction) {
+    const { title, description, gameName } = request.body;
+
+    const review = await this.reviewRepository.findOneBy({ title });
+    if (review) return "review already exists";
+
+    const game = await this.gameRepository.findOneBy({ name: gameName });
+    if (!game) return "game not found";
+
+    const newReview = Object.assign(new Review(), {
+      title,
+      description,
+      likes: 0,
+      game: game.id,
+    });
+
+    const createReview = await this.reviewRepository.save(newReview);
+
+    return createReview;
+  }
+
+  async update(request: Request, response: Response, next: NextFunction) {
+    const id = parseInt(request.params.id);
+    const { title, description, gameName } = request.body;
+
+    const review = await this.reviewRepository.findOneBy({ id });
+    if (!review) return "review not found";
+
+    const game = await this.gameRepository.findOneBy({ name: gameName });
+    if (!game) return "game not found";
+
+    review.title = title || review.title;
+    review.description = description || review.description;
+    review.game = game.id || review.game;
+
+    const updateReview = await this.reviewRepository.save(review);
+
+    return updateReview;
+  }
+
+  async remove(request: Request, response: Response, next: NextFunction) {
+    const id = parseInt(request.params.id);
+
+    let reviewToRemove = await this.reviewRepository.findOneBy({ id });
+
+    if (!reviewToRemove) {
+      return "this review not exist";
+    }
+
+    await this.reviewRepository.remove(reviewToRemove);
+
+    return "review has been removed";
+  }
+
+  async likeReview(request: Request, response: Response, next: NextFunction) {
+    const id = parseInt(request.params.id);
+
+    let review = await this.reviewRepository.findOneBy({ id });
+
+    if (!review) return "review not found";
+
+    review.likes++;
+
+    await this.reviewRepository.save(review);
+
+    return `${review.title} liked. total likes: ${review.likes}`;
+  }
+
+  async dislikeReview(
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ) {
+    const id = parseInt(request.params.id);
+
+    let review = await this.reviewRepository.findOneBy({ id });
+
+    if (!review) return "review not found";
+
+    review.likes--;
+
+    await this.reviewRepository.save(review);
+
+    return `${review.title} disliked. total likes: ${review.likes}`;
+  }
+}
