@@ -26,7 +26,7 @@ export const Routes = [
     controller: GameController,
     action: "remove",
   },
-  // Upvotes and Downvotes
+  // Likes and Dislikes
   {
     method: "post",
     route: "/like/:id",
