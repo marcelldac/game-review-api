@@ -20,6 +20,6 @@
     "typeorm": "typeorm-ts-node-commonjs",
     "migration:run": "npx typeorm-ts-node-commonjs migration:run -d ./src/data-source.ts",
     "migration:create": "npx typeorm-ts-node-commonjs migration:create ./src/migration/",
-    "migration:generate": "npx typeorm-ts-node-commonjs migration:generate ./src/migration/create-game-table -d ./src/data-source.ts"
+    "migration:generate": "npx typeorm-ts-node-commonjs migration:generate ./src/migration/update-database -d ./src/data-source.ts"
   }
 }
