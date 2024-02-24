@@ -1,6 +1,7 @@
 import { GameController } from "./controller/GameController";
 
 export const Routes = [
+  //Games
   {
     method: "get",
     route: "/games",
@@ -24,5 +25,18 @@ export const Routes = [
     route: "/games/:id",
     controller: GameController,
     action: "remove",
+  },
+  // Upvotes and Downvotes
+  {
+    method: "post",
+    route: "/like/:id",
+    controller: GameController,
+    action: "like",
+  },
+  {
+    method: "post",
+    route: "/dislike/:id",
+    controller: GameController,
+    action: "dislike",
   },
 ];
