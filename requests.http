@@ -11,8 +11,32 @@ Content-Type: application/json
 }
 ###
 DELETE http://localhost:3000/games/1
-########## Like And Dislike ##########
-POST http://localhost:3000/like/2
+
+
+
+########## Reviews Entity ##########
+GET http://localhost:3000/reviews
+###
+POST http://localhost:3000/reviews
+Content-Type: application/json
+
+{
+    "title":"Muito bom!",
+    "description":"Tudo quadrado",
+    "gameName":"Minecraft"
+}
+###
+PUT http://localhost:3000/reviews/10
+Content-Type: application/json
+
+{
+    "gameName":"Days Gone"
+}
+###
+DELETE http://localhost:3000/reviews/9
+
+
+
 ###
 POST http://localhost:3000/dislike/2
 
