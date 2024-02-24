@@ -1,6 +1,14 @@
+########## Games ##########
 GET http://localhost:3000/games
 ###
-GET http://localhost:3000/games/2
+GET http://localhost:3000/games/1
+###
+POST http://localhost:3000/games
+Content-Type: application/json
+
+{
+    "name":"Minecraft"
+}
 ###
 DELETE http://localhost:3000/games/1
 ########## Like And Dislike ##########
