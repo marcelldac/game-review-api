@@ -70,4 +70,17 @@ export const Routes = [
     controller: ReviewController,
     action: "remove",
   },
+  // Review Likes and Dislikes
+  {
+    method: "post",
+    route: "/like-review/:id",
+    controller: ReviewController,
+    action: "likeReview",
+  },
+  {
+    method: "post",
+    route: "/dislike-review/:id",
+    controller: ReviewController,
+    action: "dislikeReview",
+  },
 ];
