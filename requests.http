@@ -43,3 +43,8 @@ POST http://localhost:3000/like/3
 POST http://localhost:3000/dislike/2
 
 
+
+########## Review Like And Review Dislike  ##########
+POST http://localhost:3000/like-review/10
+###
+POST http://localhost:3000/dislike-review/10
