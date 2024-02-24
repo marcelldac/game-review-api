@@ -76,4 +76,18 @@ export class GameController {
 
     return `${game.name} liked. total likes: ${game.likes}`;
   }
+
+  async dislike(request: Request, response: Response, next: NextFunction) {
+    const id = parseInt(request.params.id);
+
+    let game = await this.gameRepository.findOneBy({ id });
+
+    if (!game) return "game not found";
+
+    game.likes--;
+
+    await this.gameRepository.save(game);
+
+    return `${game.name} disliked. total likes: ${game.likes}`;
+  }
 }
