@@ -39,4 +39,35 @@ export const Routes = [
     controller: GameController,
     action: "dislike",
   },
+  // Reviews
+  {
+    method: "get",
+    route: "/reviews",
+    controller: ReviewController,
+    action: "all",
+  },
+  {
+    method: "get",
+    route: "/reviews/:id",
+    controller: ReviewController,
+    action: "one",
+  },
+  {
+    method: "post",
+    route: "/reviews",
+    controller: ReviewController,
+    action: "save",
+  },
+  {
+    method: "put",
+    route: "/reviews/:id",
+    controller: ReviewController,
+    action: "update",
+  },
+  {
+    method: "delete",
+    route: "/reviews/:id",
+    controller: ReviewController,
+    action: "remove",
+  },
 ];
