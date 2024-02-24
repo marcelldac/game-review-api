@@ -23,10 +23,7 @@ export class GameController {
       },
     });
 
-    if (!game) {
-      return "unregistered game";
-    }
-
+    if (!game) return "unregistered game";
     return game;
   }
 
@@ -35,9 +32,7 @@ export class GameController {
 
     const game = await this.gameRepository.findOneBy({ name });
 
-    if (game) {
-      return "game already exists";
-    }
+    if (game) return "game already exists";
 
     const newGame = Object.assign(new Game(), {
       name,
@@ -52,11 +47,9 @@ export class GameController {
   async remove(request: Request, response: Response, next: NextFunction) {
     const id = parseInt(request.params.id);
 
-    let gameToRemove = await this.gameRepository.findOneBy({ id });
+    const gameToRemove = await this.gameRepository.findOneBy({ id });
 
-    if (!gameToRemove) {
-      return "this game not exist";
-    }
+    if (!gameToRemove) return "this game not exist";
 
     await this.gameRepository.remove(gameToRemove);
 
