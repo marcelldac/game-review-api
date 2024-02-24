@@ -110,6 +110,10 @@ export class ReviewController {
 
     await this.reviewRepository.save(review);
 
-    return `${review.title} disliked. total likes: ${review.likes}`;
+    return {
+      title: review.title,
+      total_likes: review.likes,
+      message: `${review.title} liked.`,
+    };
   }
 }
