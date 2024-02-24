@@ -13,7 +13,10 @@ export class Review {
   id: number;
 
   @Column()
-  name: string;
+  title: string;
+
+  @Column()
+  description: string;
 
   @Column()
   likes: number;
