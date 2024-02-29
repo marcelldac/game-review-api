@@ -38,7 +38,7 @@ Steps to run this project:
 - Like a Review
 - Dislike a Game
 - Dislike a Review
--  Games can have multiples reviews
+- Games can have multiples reviews
 
 ### GameRave API Documentation
 
@@ -60,9 +60,9 @@ Steps to run this project:
   POST /games
 ```
 
-| Parameters   | Type       | Description                                   |
-| :---------- | :--------- | :------------------------------------------ |
-| `name`      | `string` | **Mandatory**. Game Name |
+| Parameters | Type     | Description              |
+| :--------- | :------- | :----------------------- |
+| `name`     | `string` | **Mandatory**. Game Name |
 
 #### Delete a Game
 
@@ -82,18 +82,17 @@ Steps to run this project:
   GET /reviews/:id
 ```
 
-
 #### Create a Review
 
 ```http
   POST /reviews
 ```
 
-| Parameters   | Type       | Description                                   |
-| :---------- | :--------- | :------------------------------------------ |
-| `title`      | `string` | **Mandatory**. Review's Title |
-| `description`      | `string` | **Mandatory**. Review's Description |
-| `gameName`      | `boolean` | **Mandatory**. The name of the game that the review was made |
+| Parameters    | Type      | Description                                                  |
+| :------------ | :-------- | :----------------------------------------------------------- |
+| `title`       | `string`  | **Mandatory**. Review's Title                                |
+| `description` | `string`  | **Mandatory**. Review's Description                          |
+| `gameName`    | `boolean` | **Mandatory**. The name of the game that the review was made |
 
 #### Update a Review
 
@@ -101,13 +100,14 @@ Steps to run this project:
   PUT /reviews/:id
 ```
 
-| Parameters   | Type       | Description                                   |
-| :---------- | :--------- | :------------------------------------------ |
-| `title`      | `string` | Review's Title |
-| `description`      | `string` | Review's Description |
-| `gameName`      | `boolean` | The name of the game that the review was made |
+| Parameters    | Type      | Description                                   |
+| :------------ | :-------- | :-------------------------------------------- |
+| `title`       | `string`  | Review's Title                                |
+| `description` | `string`  | Review's Description                          |
+| `gameName`    | `boolean` | The name of the game that the review was made |
 
 #### Delete a Review
+
 ```http
   DELETE /reviews/:id
 ```
