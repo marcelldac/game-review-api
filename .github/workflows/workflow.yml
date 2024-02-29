@@ -1,4 +1,4 @@
-name: Run app after each PR
+name: Test app after each PR
 
 on: pull_request
 
@@ -28,5 +28,5 @@ jobs:
       - name: Generate Migrations in DB
         run: npm run migration:generate
 
-      - name: Start app
-        run: npm start
+      - name: Test app
+        run: npm t
