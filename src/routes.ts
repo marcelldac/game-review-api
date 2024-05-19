@@ -1,5 +1,5 @@
-import { GameController } from "./controller/GameController";
-import { ReviewController } from "./controller/ReviewController";
+import { GameController } from "./controllers/GameController";
+import { ReviewController } from "./controllers/ReviewController";
 
 export const Routes = [
   //Games
