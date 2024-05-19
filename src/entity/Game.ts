@@ -11,7 +11,7 @@ import { Review } from "./Review";
 export class Game {
   @PrimaryGeneratedColumn()
   id: number;
-
+  
   @Column({
     length: 30,
   })
