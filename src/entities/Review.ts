@@ -25,5 +25,5 @@ export class Review {
 
   @ManyToOne(() => Game, (game) => game.reviews, { eager: true })
   @JoinColumn()
-  game: number;
+  game: string;
 }
