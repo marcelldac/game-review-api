@@ -4,6 +4,9 @@ import { Request, Response } from 'express';
 import { AppDataSource } from './data-source';
 import { Routes } from './routes';
 
+const PORT = process.env.PORT || 3333;
+const HOST = process.env.HOST || 'localhost';
+
 AppDataSource.initialize()
   .then(async () => {
     const app = express();
@@ -31,10 +34,10 @@ AppDataSource.initialize()
       );
     });
 
-    app.listen(3000);
+    app.listen(PORT);
 
     console.log(
-      'Express server has started on port 3000. Open http://localhost:3000/games to see results'
+      `Express server has started on port 3000. Open http://${HOST}:${PORT}/games to see results`
     );
   })
   .catch((error) => console.log(error));
