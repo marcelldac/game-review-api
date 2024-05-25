@@ -1,7 +1,7 @@
-import { AppDataSource } from "../data-source";
-import { NextFunction, Request, Response } from "express";
-import { Review } from "../entities/Review";
-import { Game } from "../entities/Game";
+import { AppDataSource } from '../data-source';
+import { NextFunction, Request, Response } from 'express';
+import { Review } from '../entity/Review';
+import { Game } from '../entity/Game';
 
 export class ReviewController {
   private reviewRepository = AppDataSource.getRepository(Review);
@@ -17,7 +17,7 @@ export class ReviewController {
     const review = await this.reviewRepository.findOneBy({ id });
 
     if (!review) {
-      return "unregistered review";
+      return 'unregistered review';
     }
 
     return review;
@@ -27,13 +27,13 @@ export class ReviewController {
     const { title, description, gameName } = request.body;
 
     const game = await this.gameRepository.findOneBy({ name: gameName });
-    if (!game) return "game not found";
+    if (!game) return 'game not found';
 
     const newReview = Object.assign(new Review(), {
       title,
       description,
       likes: 0,
-      game: game.id,
+      game: game.id
     });
 
     const createReview = await this.reviewRepository.save(newReview);
@@ -46,10 +46,10 @@ export class ReviewController {
     const { title, description, gameName } = request.body;
 
     const review = await this.reviewRepository.findOneBy({ id });
-    if (!review) return "review not found";
+    if (!review) return 'review not found';
 
     const game = await this.gameRepository.findOneBy({ name: gameName });
-    if (!game) return "game not found";
+    if (!game) return 'game not found';
 
     review.title = title || review.title;
     review.description = description || review.description;
@@ -66,12 +66,12 @@ export class ReviewController {
     let reviewToRemove = await this.reviewRepository.findOneBy({ id });
 
     if (!reviewToRemove) {
-      return "this review not exist";
+      return 'this review not exist';
     }
 
     await this.reviewRepository.remove(reviewToRemove);
 
-    return "review has been removed";
+    return 'review has been removed';
   }
 
   async likeReview(request: Request, response: Response, next: NextFunction) {
@@ -79,7 +79,7 @@ export class ReviewController {
 
     let review = await this.reviewRepository.findOneBy({ id });
 
-    if (!review) return "review not found";
+    if (!review) return 'review not found';
 
     review.likes++;
 
@@ -88,7 +88,7 @@ export class ReviewController {
     return {
       title: review.title,
       total_likes: review.likes,
-      message: `${review.title} liked.`,
+      message: `${review.title} liked.`
     };
   }
 
@@ -101,7 +101,7 @@ export class ReviewController {
 
     let review = await this.reviewRepository.findOneBy({ id });
 
-    if (!review) return "review not found";
+    if (!review) return 'review not found';
 
     review.likes--;
 
@@ -110,7 +110,7 @@ export class ReviewController {
     return {
       title: review.title,
       total_likes: review.likes,
-      message: `${review.title} liked.`,
+      message: `${review.title} liked.`
     };
   }
 }
