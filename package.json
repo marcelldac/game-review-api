@@ -3,6 +3,14 @@
   "version": "0.0.1",
   "description": "Awesome project developed with TypeORM.",
   "type": "commonjs",
+  "repository": {
+    "url": "https://github.com/marcelldac/GameRave",
+    "type": "git"
+  },
+  "bugs": {
+    "url": "https://github.com/marcelldac/GameRave/issues",
+    "email": "devmarcell@protonmail.com"
+  },
   "devDependencies": {
     "@types/body-parser": "^1.19.5",
     "@types/express": "^4.17.21",
