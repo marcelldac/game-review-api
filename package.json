@@ -19,7 +19,7 @@
     "typeorm": "0.3.20"
   },
   "scripts": {
-    "start": "ts-node src/index.ts",
+    "dev": "ts-node-dev --respawn --transpile-only --inspect -- ./src/index.ts --ignore-watch node_modules",
     "typeorm": "typeorm-ts-node-commonjs",
     "migration:run": "npx typeorm-ts-node-commonjs migration:run -d ./src/data-source.ts",
     "migration:create": "npx typeorm-ts-node-commonjs migration:create ./src/migration/",
