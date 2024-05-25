@@ -1,7 +1,8 @@
 import { AppDataSource } from '../data-source';
 import { NextFunction, Request, Response } from 'express';
-import { Game } from '../entity/Game';
-import { Review } from '../entity/Review';
+import { Game } from '../entities/Game';
+import { Review } from '../entities/Review';
+import { ulid } from 'ulid';
 
 export class GameController {
   private gameRepository = AppDataSource.getRepository(Game);
@@ -46,9 +47,9 @@ export class GameController {
   }
 
   async remove(request: Request, response: Response, next: NextFunction) {
-    const id = parseInt(request.params.id);
-
-    const gameToRemove = await this.gameRepository.findOneBy({ id });
+    const gameToRemove = await this.gameRepository.findOneBy({
+      id: request.params.id
+    });
     if (!gameToRemove) return 'this game not exist';
 
     const reviewsToRemove = await this.reviewsRepository.find({
@@ -71,9 +72,7 @@ export class GameController {
   }
 
   async like(request: Request, response: Response, next: NextFunction) {
-    const id = parseInt(request.params.id);
-
-    let game = await this.gameRepository.findOneBy({ id });
+    let game = await this.gameRepository.findOneBy({ id: request.params.id });
 
     if (!game) return 'game not found';
 
@@ -89,9 +88,7 @@ export class GameController {
   }
 
   async dislike(request: Request, response: Response, next: NextFunction) {
-    const id = parseInt(request.params.id);
-
-    let game = await this.gameRepository.findOneBy({ id });
+    let game = await this.gameRepository.findOneBy({ id: request.params.id });
 
     if (!game) return 'game not found';
 

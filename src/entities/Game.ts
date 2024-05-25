@@ -1,10 +1,4 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  OneToMany,
-  Index
-} from 'typeorm';
+import { Entity, Column, OneToMany, Index, PrimaryColumn } from 'typeorm';
 import { Review } from './Review';
 
 @Entity()

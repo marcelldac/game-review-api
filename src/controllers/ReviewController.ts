@@ -1,7 +1,7 @@
 import { AppDataSource } from '../data-source';
 import { NextFunction, Request, Response } from 'express';
-import { Review } from '../entity/Review';
-import { Game } from '../entity/Game';
+import { Review } from '../entities/Review';
+import { Game } from '../entities/Game';
 
 export class ReviewController {
   private reviewRepository = AppDataSource.getRepository(Review);
