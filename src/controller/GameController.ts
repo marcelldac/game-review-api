@@ -1,7 +1,7 @@
-import { AppDataSource } from "../data-source";
-import { NextFunction, Request, Response } from "express";
-import { Game } from "../entity/Game";
-import { Review } from "../entity/Review";
+import { AppDataSource } from '../data-source';
+import { NextFunction, Request, Response } from 'express';
+import { Game } from '../entity/Game';
+import { Review } from '../entity/Review';
 
 export class GameController {
   private gameRepository = AppDataSource.getRepository(Game);
@@ -10,8 +10,8 @@ export class GameController {
   async all(request: Request, response: Response, next: NextFunction) {
     return this.gameRepository.find({
       relations: {
-        reviews: true,
-      },
+        reviews: true
+      }
     });
   }
 
@@ -21,11 +21,11 @@ export class GameController {
     const game = await this.gameRepository.findOne({
       where: { id },
       relations: {
-        reviews: true,
-      },
+        reviews: true
+      }
     });
 
-    if (!game) return "unregistered game";
+    if (!game) return 'unregistered game';
     return game;
   }
 
@@ -34,11 +34,11 @@ export class GameController {
 
     const game = await this.gameRepository.findOneBy({ name });
 
-    if (game) return "game already exists";
+    if (game) return 'game already exists';
 
     const newGame = Object.assign(new Game(), {
       name,
-      likes: 0,
+      likes: 0
     });
 
     const createGame = await this.gameRepository.save(newGame);
@@ -50,10 +50,10 @@ export class GameController {
     const id = parseInt(request.params.id);
 
     const gameToRemove = await this.gameRepository.findOneBy({ id });
-    if (!gameToRemove) return "this game not exist";
+    if (!gameToRemove) return 'this game not exist';
 
     const reviewsToRemove = await this.reviewsRepository.find({
-      where: { game: gameToRemove.id },
+      where: { game: gameToRemove.id }
     });
 
     if (reviewsToRemove) {
@@ -63,12 +63,12 @@ export class GameController {
 
       await this.gameRepository.remove(gameToRemove);
 
-      return "game and your reviews has been removed";
+      return 'game and your reviews has been removed';
     }
 
     await this.gameRepository.remove(gameToRemove);
 
-    return "game has been removed";
+    return 'game has been removed';
   }
 
   async like(request: Request, response: Response, next: NextFunction) {
@@ -76,7 +76,7 @@ export class GameController {
 
     let game = await this.gameRepository.findOneBy({ id });
 
-    if (!game) return "game not found";
+    if (!game) return 'game not found';
 
     game.likes++;
 
@@ -85,7 +85,7 @@ export class GameController {
     return {
       name: game.name,
       total_likes: game.likes,
-      message: `${game.name} liked.`,
+      message: `${game.name} liked.`
     };
   }
 
@@ -94,7 +94,7 @@ export class GameController {
 
     let game = await this.gameRepository.findOneBy({ id });
 
-    if (!game) return "game not found";
+    if (!game) return 'game not found';
 
     game.likes--;
 
@@ -103,7 +103,7 @@ export class GameController {
     return {
       name: game.name,
       total_likes: game.likes,
-      message: `${game.name} disliked.`,
+      message: `${game.name} disliked.`
     };
   }
 }

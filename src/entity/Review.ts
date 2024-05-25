@@ -3,9 +3,9 @@ import {
   PrimaryGeneratedColumn,
   Column,
   ManyToOne,
-  JoinColumn,
-} from "typeorm";
-import { Game } from "./Game";
+  JoinColumn
+} from 'typeorm';
+import { Game } from './Game';
 
 @Entity()
 export class Review {
@@ -13,7 +13,7 @@ export class Review {
   id: number;
 
   @Column({
-    length: 30,
+    length: 30
   })
   title: string;
 

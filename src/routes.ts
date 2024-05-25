@@ -1,87 +1,87 @@
-import { GameController } from "./controller/GameController";
-import { ReviewController } from "./controller/ReviewController";
+import { GameController } from './controller/GameController';
+import { ReviewController } from './controller/ReviewController';
 
 export const Routes = [
   //Games
   {
-    method: "get",
-    route: "/games",
+    method: 'get',
+    route: '/games',
     controller: GameController,
-    action: "all",
+    action: 'all'
   },
   {
-    method: "get",
-    route: "/games/:id",
+    method: 'get',
+    route: '/games/:id',
     controller: GameController,
-    action: "one",
+    action: 'one'
   },
   {
-    method: "post",
-    route: "/games",
+    method: 'post',
+    route: '/games',
     controller: GameController,
-    action: "save",
+    action: 'save'
   },
   {
-    method: "delete",
-    route: "/games/:id",
+    method: 'delete',
+    route: '/games/:id',
     controller: GameController,
-    action: "remove",
+    action: 'remove'
   },
   // Likes and Dislikes
   {
-    method: "post",
-    route: "/like/:id",
+    method: 'post',
+    route: '/like/:id',
     controller: GameController,
-    action: "like",
+    action: 'like'
   },
   {
-    method: "post",
-    route: "/dislike/:id",
+    method: 'post',
+    route: '/dislike/:id',
     controller: GameController,
-    action: "dislike",
+    action: 'dislike'
   },
   // Reviews
   {
-    method: "get",
-    route: "/reviews",
+    method: 'get',
+    route: '/reviews',
     controller: ReviewController,
-    action: "all",
+    action: 'all'
   },
   {
-    method: "get",
-    route: "/reviews/:id",
+    method: 'get',
+    route: '/reviews/:id',
     controller: ReviewController,
-    action: "one",
+    action: 'one'
   },
   {
-    method: "post",
-    route: "/reviews",
+    method: 'post',
+    route: '/reviews',
     controller: ReviewController,
-    action: "save",
+    action: 'save'
   },
   {
-    method: "put",
-    route: "/reviews/:id",
+    method: 'put',
+    route: '/reviews/:id',
     controller: ReviewController,
-    action: "update",
+    action: 'update'
   },
   {
-    method: "delete",
-    route: "/reviews/:id",
+    method: 'delete',
+    route: '/reviews/:id',
     controller: ReviewController,
-    action: "remove",
+    action: 'remove'
   },
   // Review Likes and Dislikes
   {
-    method: "post",
-    route: "/like-review/:id",
+    method: 'post',
+    route: '/like-review/:id',
     controller: ReviewController,
-    action: "likeReview",
+    action: 'likeReview'
   },
   {
-    method: "post",
-    route: "/dislike-review/:id",
+    method: 'post',
+    route: '/dislike-review/:id',
     controller: ReviewController,
-    action: "dislikeReview",
-  },
+    action: 'dislikeReview'
+  }
 ];

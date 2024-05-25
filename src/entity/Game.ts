@@ -3,9 +3,9 @@ import {
   PrimaryGeneratedColumn,
   Column,
   OneToMany,
-  Index,
-} from "typeorm";
-import { Review } from "./Review";
+  Index
+} from 'typeorm';
+import { Review } from './Review';
 
 @Entity()
 export class Game {
@@ -13,7 +13,7 @@ export class Game {
   id: number;
 
   @Column({
-    length: 30,
+    length: 30
   })
   @Index({ unique: true })
   name: string;
