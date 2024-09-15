@@ -11,8 +11,7 @@ AppDataSource.initialize()
   .then(async () => {
     const app = express();
     app.use(bodyParser.json());
-
-    Routes.forEach((route) => {
+    Routes.forEach(route => {
       (app as any)[route.method](
         route.route,
         (req: Request, res: Response, next: Function) => {
@@ -21,23 +20,15 @@ AppDataSource.initialize()
             res,
             next
           );
-          if (result instanceof Promise) {
-            result.then((result) =>
-              result !== null && result !== undefined
-                ? res.send(result)
-                : undefined
-            );
-          } else if (result !== null && result !== undefined) {
-            res.json(result);
-          }
+          if (result instanceof Promise)
+            result.then(result => (result ? res.send(result) : undefined));
+          else if (result) res.json(result);
         }
       );
     });
-
     app.listen(PORT);
-
     console.log(
       `Express server has started on port 3000. Open http://${HOST}:${PORT}/games to see results`
     );
   })
-  .catch((error) => console.log(error));
+  .catch(error => console.log(error));

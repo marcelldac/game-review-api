@@ -3,7 +3,7 @@ import { MigrationInterface, QueryRunner } from 'typeorm';
 export class UpdateDatabase1708781293002 implements MigrationInterface {
   name = 'UpdateDatabase1708781293002';
 
-  public async up(queryRunner: QueryRunner): Promise<void> {
+  async up(queryRunner: QueryRunner) {
     await queryRunner.query(
       `CREATE TABLE "review" ("id" SERIAL NOT NULL, "title" character varying NOT NULL, "description" character varying NOT NULL, "likes" integer NOT NULL, "gameId" integer, CONSTRAINT "UQ_5405a7b364f3ad177f77743c402" UNIQUE ("title"), CONSTRAINT "PK_2e4299a343a81574217255c00ca" PRIMARY KEY ("id"))`
     );
@@ -18,7 +18,7 @@ export class UpdateDatabase1708781293002 implements MigrationInterface {
     );
   }
 
-  public async down(queryRunner: QueryRunner): Promise<void> {
+  async down(queryRunner: QueryRunner) {
     await queryRunner.query(
       `ALTER TABLE "review" DROP CONSTRAINT "FK_ef6fa2aeb98fd27d0a8d71735b6"`
     );

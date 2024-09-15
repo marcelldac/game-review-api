@@ -1,5 +1,5 @@
 import { AppDataSource } from '../data-source';
-import { NextFunction, Request, Response } from 'express';
+import { Request } from 'express';
 import { Game } from '../entity/Game';
 import { Review } from '../entity/Review';
 
@@ -7,7 +7,7 @@ export class GameController {
   private gameRepository = AppDataSource.getRepository(Game);
   private reviewsRepository = AppDataSource.getRepository(Review);
 
-  async all(request: Request, response: Response, next: NextFunction) {
+  async all() {
     return this.gameRepository.find({
       relations: {
         reviews: true
@@ -15,7 +15,7 @@ export class GameController {
     });
   }
 
-  async one(request: Request, response: Response, next: NextFunction) {
+  async one(request: Request) {
     const id = parseInt(request.params.id);
 
     const game = await this.gameRepository.findOne({
@@ -29,7 +29,7 @@ export class GameController {
     return game;
   }
 
-  async save(request: Request, response: Response, next: NextFunction) {
+  async save(request: Request) {
     const { name } = request.body;
 
     const game = await this.gameRepository.findOneBy({ name });
@@ -46,7 +46,7 @@ export class GameController {
     return createGame;
   }
 
-  async remove(request: Request, response: Response, next: NextFunction) {
+  async remove(request: Request) {
     const id = parseInt(request.params.id);
 
     const gameToRemove = await this.gameRepository.findOneBy({ id });
@@ -71,7 +71,7 @@ export class GameController {
     return 'game has been removed';
   }
 
-  async like(request: Request, response: Response, next: NextFunction) {
+  async like(request: Request) {
     const id = parseInt(request.params.id);
 
     let game = await this.gameRepository.findOneBy({ id });
@@ -89,7 +89,7 @@ export class GameController {
     };
   }
 
-  async dislike(request: Request, response: Response, next: NextFunction) {
+  async dislike(request: Request) {
     const id = parseInt(request.params.id);
 
     let game = await this.gameRepository.findOneBy({ id });
