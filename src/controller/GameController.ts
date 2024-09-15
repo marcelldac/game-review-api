@@ -1,109 +1,38 @@
-import { AppDataSource } from '../data-source';
+import { GameService } from '../service/GameService';
 import { Request } from 'express';
-import { Game } from '../entity/Game';
-import { Review } from '../entity/Review';
 
 export class GameController {
-  private gameRepository = AppDataSource.getRepository(Game);
-  private reviewsRepository = AppDataSource.getRepository(Review);
+  private gameService: GameService;
+
+  constructor() {
+    this.gameService = new GameService();
+  }
 
   async all() {
-    return this.gameRepository.find({
-      relations: {
-        reviews: true
-      }
-    });
+    this.gameService.all();
   }
 
   async one(request: Request) {
     const id = parseInt(request.params.id);
-
-    const game = await this.gameRepository.findOne({
-      where: { id },
-      relations: {
-        reviews: true
-      }
-    });
-
-    if (!game) return 'unregistered game';
-    return game;
+    return await this.gameService.one(id);
   }
 
   async save(request: Request) {
-    const { name } = request.body;
-
-    const game = await this.gameRepository.findOneBy({ name });
-
-    if (game) return 'game already exists';
-
-    const newGame = Object.assign(new Game(), {
-      name,
-      likes: 0
-    });
-
-    const createGame = await this.gameRepository.save(newGame);
-
-    return createGame;
+    return await this.gameService.save(request.body);
   }
 
   async remove(request: Request) {
     const id = parseInt(request.params.id);
-
-    const gameToRemove = await this.gameRepository.findOneBy({ id });
-    if (!gameToRemove) return 'this game not exist';
-
-    const reviewsToRemove = await this.reviewsRepository.find({
-      where: { game: gameToRemove.id }
-    });
-
-    if (reviewsToRemove) {
-      for (const review of reviewsToRemove) {
-        await this.reviewsRepository.remove(review);
-      }
-
-      await this.gameRepository.remove(gameToRemove);
-
-      return 'game and your reviews has been removed';
-    }
-
-    await this.gameRepository.remove(gameToRemove);
-
-    return 'game has been removed';
+    return await this.gameService.remove(id);
   }
 
   async like(request: Request) {
     const id = parseInt(request.params.id);
-
-    let game = await this.gameRepository.findOneBy({ id });
-
-    if (!game) return 'game not found';
-
-    game.likes++;
-
-    await this.gameRepository.save(game);
-
-    return {
-      name: game.name,
-      total_likes: game.likes,
-      message: `${game.name} liked.`
-    };
+    return await this.gameService.like(id);
   }
 
   async dislike(request: Request) {
     const id = parseInt(request.params.id);
-
-    let game = await this.gameRepository.findOneBy({ id });
-
-    if (!game) return 'game not found';
-
-    game.likes--;
-
-    await this.gameRepository.save(game);
-
-    return {
-      name: game.name,
-      total_likes: game.likes,
-      message: `${game.name} disliked.`
-    };
+    return await this.gameService.dislike(id);
   }
 }
