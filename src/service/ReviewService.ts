@@ -1,14 +1,7 @@
+import { CreateReviewDto, UpdateReviewDto } from '../dtos/review';
 import { AppDataSource } from '../data-source';
 import { Review } from '../entity/Review';
 import { Game } from '../entity/Game';
-
-interface CreateReviewDto {
-  title: string;
-  description: string;
-  gameName: string;
-}
-
-interface UpdateReviewDto extends Partial<CreateReviewDto> {}
 
 export class ReviewService {
   private reviewRepository = AppDataSource.getRepository(Review);
