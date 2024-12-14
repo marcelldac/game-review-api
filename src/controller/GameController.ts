@@ -9,7 +9,7 @@ export class GameController {
   }
 
   async all() {
-    this.gameService.all();
+    return this.gameService.all();
   }
 
   async one(request: Request) {
