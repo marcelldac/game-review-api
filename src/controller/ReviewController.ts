@@ -9,7 +9,7 @@ export class ReviewController {
   }
 
   async all() {
-    return await this.reviewService.all();
+    return this.reviewService.all();
   }
 
   async one(request: Request) {
